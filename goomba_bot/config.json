@@ -1,0 +1,16 @@
+{
+    "url": "https://cad.onshape.com/documents/e9064c6d5193bddefb68f171/w/f2e231ecb4ac8838a659f7c8/e/effd3c5c89f281068763c18d",
+    "output_format": "urdf",
+    "output_filename": "robot",
+    "assets_directory": "assets",
+    "package_name": "goomba_bot",
+    "robot_name": "goomba_bot",
+    "post_import_commands": [
+        "echo 'Import done'"
+    ],
+    "round_decimals": 12,
+    "merge_stls": true,
+    "color": [0.55, 0.55, 0.58, 1.0]
+
+}
+

@@ -1,0 +1,13 @@
+{
+    "configuration": "default",
+    "documentId": "e9064c6d5193bddefb68f171",
+    "documentMicroversion": "a607c7c2f71df87befc65120",
+    "elementId": "48ee6bf51acfdf4981447e1d",
+    "fullConfiguration": "default",
+    "id": "Mrx0auKPNj+zUq30x",
+    "isStandardContent": false,
+    "name": "raspberrypi <1>",
+    "partId": "JFD",
+    "suppressed": false,
+    "type": "Part"
+}

@@ -2,39 +2,49 @@
 <!-- Generated using onshape-to-robot -->
 <!-- Onshape https://cad.onshape.com/documents/e9064c6d5193bddefb68f171/w/f2e231ecb4ac8838a659f7c8/e/effd3c5c89f281068763c18d -->
 <robot name="goomba_bot">
-
-  <link name="base"></link>
-  <!-- Link base -->
-
+  
+  <!-- <link name="base">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+  </link> -->
+  <!-- Link chassis -->
   <link name="chassis">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.208849"/>
-      <inertia ixx="0.000266638" ixy="-5.78139e-07" ixz="-8.08118e-06" iyy="0.000363003" iyz="-1.06903e-07" izz="0.000597738"/>
+      <origin xyz="0.0970948 -0.0126647 0.0115809" rpy="0 0 0"/>
+      <mass value="0.583556"/>
+      <inertia ixx="0.000719834" ixy="1.05237e-05" ixz="-8.32166e-05" iyy="0.00138714" iyz="1.31908e-05" izz="0.00170827"/>
     </inertial>
+    <!-- Part chassis_parts -->
     <visual>
-      <origin xyz="0.0929327 -0.0126615 -0.00485732" rpy="0 -0 0"/>
+      <origin xyz="0.0970948 -0.0126647 0.0115809" rpy="0 -0 0"/>
       <geometry>
-        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/base_visual.stl"/>
+        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/chassis_visual.stl"/>
       </geometry>
-      <material name="base_parts_material">
+      <material name="chassis_parts_material">
         <color rgba="0.55 0.55 0.58 1"/>
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0929327 -0.0126615 -0.00485732" rpy="0 -0 0"/>
+      <origin xyz="0.0970948 -0.0126647 0.0115809" rpy="0 -0 0"/>
       <geometry>
-        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/base_collision.stl"/>
+        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/chassis_collision.stl"/>
       </geometry>
     </collision>
   </link>
-
+  <!-- Frame base (dummy link + fixed joint) -->
+  <!-- <joint name="base_frame" type="fixed">
+    <origin xyz="0.11846 -0.0126306 -9.89596e-06" rpy="3.14159 0 -0"/>
+    <parent link="base"/>
+    <child link="chassis"/>
+    <axis xyz="0 0 0"/>
+  </joint> -->
+  <!-- Link left_wheel -->
   <link name="left_wheel">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-1.8653e-08 1.32e-09 -0.018127" rpy="0 0 0"/>
       <mass value="0.0296221"/>
-      <inertia ixx="1.19513e-05" ixy="-1e-12" ixz="0" iyy="1.19507e-05" iyz="0" izz="2.00869e-05"/>
+      <inertia ixx="1.19513e-05" ixy="-1e-12" ixz="0" iyy="1.19507e-05" iyz="-0" izz="2.00869e-05"/>
     </inertial>
+    <!-- Part left_wheel_parts -->
     <visual>
       <origin xyz="-1.8653e-08 1.32e-09 -0.018127" rpy="1.5708 -0 -2.55637"/>
       <geometry>
@@ -51,13 +61,20 @@
       </geometry>
     </collision>
   </link>
-
+  <!-- Joint from chassis to left_wheel -->
+  <joint name="base_to_left_wheel" type="continuous">
+    <origin xyz="0.118533 -0.0607433 -0.0107495" rpy="1.5708 0.585227 3.14159"/>
+    <parent link="chassis"/>
+    <child link="left_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
   <!-- Link right_wheel -->
   <link name="right_wheel">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="-1.8653e-08 1.32e-09 -0.018127" rpy="0 0 0"/>
       <mass value="0.0296221"/>
-      <inertia ixx="1.19513e-05" ixy="-1e-12" ixz="0" iyy="1.19507e-05" iyz="0" izz="2.00869e-05"/>
+      <inertia ixx="1.19513e-05" ixy="-1e-12" ixz="0" iyy="1.19507e-05" iyz="-0" izz="2.00869e-05"/>
     </inertial>
     <!-- Part right_wheel_parts -->
     <visual>
@@ -76,17 +93,24 @@
       </geometry>
     </collision>
   </link>
-
+  <!-- Joint from chassis to right_wheel -->
+  <joint name="base_to_right_wheel" type="continuous">
+    <origin xyz="0.118569 0.0354816 -0.0107495" rpy="1.5708 -1.5708 0"/>
+    <parent link="chassis"/>
+    <child link="right_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
   <!-- Link lidar -->
   <link name="lidar">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.045"/>
-      <inertia ixx="0.045" ixy="0" ixz="0" iyy="0.045" iyz="0" izz="0.045"/>
+      <origin xyz="-4.30087e-05 -5.49176e-05 -0.0152796" rpy="0 0 0"/>
+      <mass value="0.0471736"/>
+      <inertia ixx="8.91774e-06" ixy="1.16237e-07" ixz="-6.555e-09" iyy="9.00186e-06" iyz="6.1599e-08" izz="9.70007e-06"/>
     </inertial>
     <!-- Part lidar_parts -->
     <visual>
-      <origin xyz="-0.157053 -0.0229684 0.0570901" rpy="3.14159 -0 0"/>
+      <origin xyz="-4.30087e-05 -5.49176e-05 -0.0152796" rpy="3.14159 -0 0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/lidar_visual.stl"/>
       </geometry>
@@ -95,24 +119,30 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.157053 -0.0229684 0.0570901" rpy="3.14159 -0 0"/>
+      <origin xyz="-4.30087e-05 -5.49176e-05 -0.0152796" rpy="3.14159 -0 0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/lidar_collision.stl"/>
       </geometry>
     </collision>
   </link>
-
-
+  <!-- Joint from chassis to lidar -->
+  <joint name="base_to_lidar" type="fixed">
+    <origin xyz="0.157313 -0.0226586 0.0636901" rpy="-3.14159 -0 0"/>
+    <parent link="chassis"/>
+    <child link="lidar"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
   <!-- Link imu -->
   <link name="imu">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.005"/>
-      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      <origin xyz="0.00483974 -0.00755805 -0.0005" rpy="0 0 0"/>
+      <mass value="0.00498952"/>
+      <inertia ixx="1.65735e-07" ixy="5e-12" ixz="0" iyy="8.9881e-08" iyz="-0" izz="2.54784e-07"/>
     </inertial>
     <!-- Part imu_parts -->
     <visual>
-      <origin xyz="-0.080638 -0.00958331 0.0444901" rpy="-3.14159 -0 -0"/>
+      <origin xyz="0.00483974 -0.00755805 -0.0005" rpy="-3.14159 -0 -0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/imu_visual.stl"/>
       </geometry>
@@ -121,23 +151,30 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.080638 -0.00958331 0.0444901" rpy="-3.14159 -0 -0"/>
+      <origin xyz="0.00483974 -0.00755805 -0.0005" rpy="-3.14159 -0 -0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/imu_collision.stl"/>
       </geometry>
     </collision>
   </link>
-
+  <!-- Joint from chassis to imu -->
+  <joint name="base_to_imu" type="fixed">
+    <origin xyz="0.080638 -0.00958239 0.0418901" rpy="3.14159 -0 0"/>
+    <parent link="chassis"/>
+    <child link="imu"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
   <!-- Link realsense -->
   <link name="realsense">
     <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="1e-09"/>
-      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+      <origin xyz="0.022747 6.06224e-05 -0.0119511" rpy="0 0 0"/>
+      <mass value="0.0721212"/>
+      <inertia ixx="6.65208e-06" ixy="4.72e-10" ixz="1.53827e-07" iyy="4.70057e-05" iyz="-1.936e-09" izz="4.65739e-05"/>
     </inertial>
     <!-- Part realsense_parts -->
     <visual>
-      <origin xyz="0.0388416 -0.0363901 0.0136864" rpy="-1.5708 -1.5708 0"/>
+      <origin xyz="0.022747 6.06224e-05 -0.0119511" rpy="-1.5708 -1.5708 0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/realsense_visual.stl"/>
       </geometry>
@@ -146,53 +183,56 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0388416 -0.0363901 0.0136864" rpy="-1.5708 -1.5708 0"/>
+      <origin xyz="0.022747 6.06224e-05 -0.0119511" rpy="-1.5708 -1.5708 0"/>
       <geometry>
         <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/realsense_collision.stl"/>
       </geometry>
     </collision>
   </link>
-
-  <joint name="base_chassis" type="fixed">
-    <parent link="base"/>
-    <child link="chassis"/>
-  </joint>
-
-  <!-- Joint from base to left_wheel -->
-  <joint name="chassis_left_wheel" type="continuous">
-    <origin xyz="0.118533 -0.0607433 -0.00814945" rpy="1.5708 0.585227 3.14159"/>
-    <parent link="chassis"/>
-    <child link="left_wheel"/>
-    <axis xyz="0 0 1"/>
-  </joint>
-
-  <!-- Joint from base to right_wheel -->
-  <joint name="chassis_right_wheel" type="continuous">
-    <origin xyz="0.118569 0.0354816 -0.00814945" rpy="1.5708 -1.5708 0"/>
-    <parent link="chassis"/>
-    <child link="right_wheel"/>
-    <axis xyz="0 0 1"/>
-  </joint>
-
-  <!-- Joint from base to lidar -->
-  <joint name="chassis_lidar" type="fixed">
-    <origin xyz="0.157053 -0.0229684 0.0570901" rpy="-3.14159 -0 -0"/>
-    <parent link="chassis"/>
-    <child link="lidar"/>
-  </joint>
-
-  <!-- Joint from base to imu -->
-  <joint name="chassis_imu" type="fixed">
-    <origin xyz="0.080638 -0.00958331 0.0444901" rpy="3.14159 -0 0"/>
-    <parent link="chassis"/>
-    <child link="imu"/>
-  </joint>
-
-  <!-- Joint from base to realsense -->
-  <joint name="chassis_realsense" type="fixed">
-    <origin xyz="-0.0136864 -0.0388416 0.0363901" rpy="1.5708 0 1.5708"/>
+  <!-- Joint from chassis to realsense -->
+  <joint name="base_to_realsense" type="fixed">
+    <origin xyz="-0.0136864 -0.0388416 0.0337901" rpy="1.5708 0 1.5708"/>
     <parent link="chassis"/>
     <child link="realsense"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
   </joint>
+  <!-- Link caster_wheel -->
+  <link name="caster_wheel">
+    <inertial>
+      <origin xyz="0 0 -0" rpy="0 0 0"/>
+      <mass value="0.00608217"/>
+      <inertia ixx="4.60012e-07" ixy="0" ixz="0" iyy="4.60012e-07" iyz="-0" izz="7.76391e-07"/>
+    </inertial>
+    <!-- Part caster_wheel_parts -->
+    <visual>
+      <origin xyz="0 0 -0" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/caster_wheel_visual.stl"/>
+      </geometry>
+      <material name="caster_wheel_parts_material">
+        <color rgba="0.55 0.55 0.58 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0" rpy="1.5708 0 -3.14159"/>
+      <geometry>
+        <mesh filename="file:///home/ws/src/goomba_bot/assets/merged/caster_wheel_collision.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from chassis to caster_wheel -->
+  <joint name="base_to_caster_wheel" type="fixed">
+    <origin xyz="0.0194599 -0.0131333 -0.0300099" rpy="1.5708 0 -3.14159"/>
+    <parent link="chassis"/>
+    <child link="caster_wheel"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <gazebo reference="caster_wheel">
+    <material>Gazebo/Black</material>
+    <mu1 value="0.001"/>
+    <mu2 value="0.001"/>
+  </gazebo>
 
 </robot>

@@ -5,8 +5,8 @@
         <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
 
             <!-- Wheel Information -->
-            <left_joint>chassis_left_wheel</left_joint>
-            <right_joint>chassis_right_wheel</right_joint>
+            <left_joint>base_to_left_wheel</left_joint>
+            <right_joint>base_to_right_wheel</right_joint>
             <wheel_separation>0.0962249</wheel_separation>
             <wheel_diameter>0.065</wheel_diameter>
 
@@ -18,7 +18,7 @@
             
             <!-- Output -->
             <odometry_frame>odom</odometry_frame>
-            <robot_base_frame>base</robot_base_frame>
+            <robot_base_frame>chassis</robot_base_frame>
 
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>

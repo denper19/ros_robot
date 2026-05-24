@@ -6,10 +6,11 @@
     "package_name": "goomba_bot",
     "robot_name": "goomba_bot",
     "post_import_commands": [
-        "echo 'Import done'"
+        "bash -c 'if [ -f robot.urdf ]; then mv robot.urdf description/robot_core.xacro; elif [ -f goomba_bot/robot.urdf ]; then mv goomba_bot/robot.urdf goomba_bot/description/robot_core.xacro; else echo \"robot.urdf not found (run from package dir or src/)\" && exit 1; fi'"
     ],
     "round_decimals": 12,
     "merge_stls": true,
+    "ignore_limits": true,
     "color": [0.55, 0.55, 0.58, 1.0]
 
 }

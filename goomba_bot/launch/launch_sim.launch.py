@@ -19,6 +19,12 @@ def generate_launch_description():
 
     package_name='goomba_bot' #<--- CHANGE ME
 
+    world_file = os.path.join(
+        get_package_share_directory(package_name),
+        'config',
+        'sim_world.world'
+    )
+
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
@@ -29,7 +35,8 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
-             )
+                launch_arguments={'world': world_file}.items()
+            )
 
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',

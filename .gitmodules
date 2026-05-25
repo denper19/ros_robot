@@ -1,3 +1,6 @@
 [submodule "ldlidar_stl_ros2"]
 	path = ldlidar_stl_ros2
 	url = https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2.git
+[submodule "goomba_bot/config/plywood_mazes"]
+	path = goomba_bot/config/plywood_mazes
+	url = https://github.com/rfzeg/plywood_mazes.git

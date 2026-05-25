@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'laser_scan_plotter = slam_algorithms.plot_lidar_scans:main',
         ],
     },
 )

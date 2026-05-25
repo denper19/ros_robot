@@ -4,7 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 
 
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 from launch_ros.actions import Node
@@ -19,15 +19,31 @@ def generate_launch_description():
 
     package_name='goomba_bot' #<--- CHANGE ME
 
-    world_file = os.path.join(
-        get_package_share_directory(package_name),
+    pkg_share = get_package_share_directory(package_name)
+
+    models_path = os.path.join(
+        pkg_share,
         'config',
-        'sim_world.world'
+        'plywood_mazes',
+        'models',
+    )
+
+    world_file = os.path.join(
+        pkg_share,
+        'config',
+        'plywood_mazes',
+        'worlds',
+        'maze_1_6x5.world',
+    )
+
+    gazebo_model_path = SetEnvironmentVariable(
+        'GAZEBO_MODEL_PATH',
+        models_path,
     )
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
+                    pkg_share, 'launch', 'rsp.launch.py'
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
@@ -48,6 +64,7 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
+        gazebo_model_path,
         rsp,
         gazebo,
         spawn_entity,

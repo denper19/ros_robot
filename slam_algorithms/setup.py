@@ -24,7 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'laser_scan_plotter = slam_algorithms.plot_lidar_scans:main',
+            'data_collector = slam_algorithms.collect_data:main',
+            'test_route = slam_algorithms.test_route:main',
         ],
     },
 )

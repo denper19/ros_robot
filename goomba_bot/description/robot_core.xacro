@@ -67,7 +67,6 @@
     <parent link="chassis"/>
     <child link="left_wheel"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10"/>
   </joint>
   <!-- Link right_wheel -->
   <link name="right_wheel">
@@ -99,7 +98,6 @@
     <parent link="chassis"/>
     <child link="right_wheel"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10"/>
   </joint>
   <!-- Link lidar -->
   <link name="lidar">
@@ -131,7 +129,6 @@
     <parent link="chassis"/>
     <child link="lidar"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10"/>
   </joint>
   <!-- Link imu -->
   <link name="imu">
@@ -163,7 +160,6 @@
     <parent link="chassis"/>
     <child link="imu"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10"/>
   </joint>
   <!-- Link realsense -->
   <link name="realsense">
@@ -195,7 +191,6 @@
     <parent link="chassis"/>
     <child link="realsense"/>
     <axis xyz="0 0 1"/>
-    <limit effort="10" velocity="10"/>
   </joint>
   <!-- Link caster_wheel -->
   <link name="caster_wheel">
